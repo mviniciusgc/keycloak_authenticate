@@ -1,10 +1,14 @@
-FROM quay.io/keycloak/keycloak:21.0.1 as builder
+FROM quay.io/keycloak/keycloak:19.0.3 as builder
 
 ENV KC_FEATURES=authorization,account2,account-api,admin-fine-grained-authz,admin2,docker,impersonation,token-exchange,client-policies,declarative-user-profile,dynamic-scopes,preview
 ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
 ENV KC_DB=postgres
 ENV KC_CACHE=ispn
+ENV KC_CACHE_STACK=kubernetes
+
+RUN curl -sL https://github.com/aerogear/keycloak-metrics-spi/releases/download/2.5.3/keycloak-metrics-spi-2.5.3.jar \
+  -o /opt/keycloak/providers/keycloak-metrics-spi-2.5.3.jar
 
 RUN ["/opt/keycloak/bin/kc.sh", "build"]
 
@@ -23,4 +27,3 @@ ENV KC_HTTP_ENABLED=false
 ENV KC_LOG_CONSOLE_OUTPUT=json
 
 ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start", "--optimized"]
-
