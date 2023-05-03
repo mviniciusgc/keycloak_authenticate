@@ -4,8 +4,6 @@ ENV KC_FEATURES=authorization,account2,account-api,admin-fine-grained-authz,admi
 ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
 ENV KC_DB=postgres
-ENV KC_CACHE=ispn
-ENV KC_CACHE_STACK=kubernetes
 
 RUN ["/opt/keycloak/bin/kc.sh", "build"]
 
