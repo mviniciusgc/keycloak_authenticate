@@ -1,4 +1,4 @@
-FROM quay.io/keycloak/keycloak:19.0.3 as builder
+FROM quay.io/keycloak/keycloak:21.0.1 as builder
 
 ENV KC_FEATURES=authorization,account2,account-api,admin-fine-grained-authz,admin2,docker,impersonation,token-exchange,client-policies,declarative-user-profile,dynamic-scopes,preview
 ENV KC_HEALTH_ENABLED=true
