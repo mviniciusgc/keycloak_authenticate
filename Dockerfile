@@ -22,4 +22,5 @@ ENV KC_HTTP_ENABLED=false
 ENV KC_LOG_CONSOLE_OUTPUT=json
 
 ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start", "--optimized --hostname-strict=false"]
+ENTRYPOINT ["/opt/bin/entry_point.sh","-p","5555:4444"]
 CMD ["-p","8080:8080"]
