@@ -4,7 +4,7 @@ ENV KC_FEATURES=authorization,account2,account-api,admin-fine-grained-authz,admi
 ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
 ENV KC_DB=postgres
-EXPOSE 8080
+CMD ["-p","8081:8080"]
 
 RUN ["/opt/keycloak/bin/kc.sh", "build"]
 
