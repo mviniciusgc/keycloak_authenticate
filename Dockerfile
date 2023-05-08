@@ -4,7 +4,6 @@ ENV KC_FEATURES=authorization,account2,account-api,admin-fine-grained-authz,admi
 ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
 ENV KC_DB=postgres
-CMD ["-p","8081:8080"]
 
 RUN ["/opt/keycloak/bin/kc.sh", "build"]
 
@@ -23,3 +22,4 @@ ENV KC_HTTP_ENABLED=false
 ENV KC_LOG_CONSOLE_OUTPUT=json
 
 ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start", "--optimized --hostname-strict=false"]
+CMD ["-p","8080:8080"]
