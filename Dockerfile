@@ -10,3 +10,4 @@ EXPOSE 8080
 
 # Comando para iniciar o Keycloak
 CMD ["-b", "0.0.0.0"]
+
