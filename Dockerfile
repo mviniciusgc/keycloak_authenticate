@@ -9,7 +9,6 @@ ENV KC_CACHE=ispn
 RUN curl -sL https://github.com/aerogear/keycloak-metrics-spi/releases/download/2.5.3/keycloak-metrics-spi-2.5.3.jar \
   -o /opt/keycloak/providers/keycloak-metrics-spi-2.5.3.jar
 
-COPY themes/ /opt/keycloak/themes
 
 RUN ["/opt/keycloak/bin/kc.sh", "build"]
 
