@@ -6,10 +6,6 @@ ENV KC_METRICS_ENABLED=true
 ENV KC_DB=postgres
 ENV KC_CACHE=ispn
 
-RUN curl -sL https://github.com/aerogear/keycloak-metrics-spi/releases/download/2.5.3/keycloak-metrics-spi-2.5.3.jar \
-  -o /opt/keycloak/providers/keycloak-metrics-spi-2.5.3.jar
-
-
 RUN ["/opt/keycloak/bin/kc.sh", "build"]
 
 FROM quay.io/keycloak/keycloak:21.0.1
