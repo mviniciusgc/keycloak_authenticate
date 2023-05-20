@@ -1,19 +1,24 @@
-# Use the Keycloak 21.1 image from quay.io
-FROM quay.io/keycloak/keycloak:21.1
+FROM quay.io/keycloak/keycloak:21.1 as builder
 
-# Define the Keycloak port
 EXPOSE 8080
 
-# Set the Keycloak configuration environment variables
-ENV KEYCLOAK_USER=admin
-ENV KEYCLOAK_PASSWORD=admin
+ENV KC_FEATURES=authorization,account2,account-api,admin-fine-grained-authz,admin2,docker,impersonation,token-exchange,client-policies,declarative-user-profile,dynamic-scopes,preview
 ENV KC_HEALTH_ENABLED=true
 ENV KC_DB=postgres
 
-# Build the final Keycloak URL with the Railway.app proxy
-ENV PROXY_ADDRESS_FORWARDING=true
+RUN ["/opt/keycloak/bin/kc.sh", "build"]
 
-# You may need to update the "<your-railway-app-url>" with your actual Railway.app URL
+FROM quay.io/keycloak/keycloak:21.1
 
-# Start Keycloak
-CMD ["-b", "0.0.0.0"]
+COPY --from=builder /opt/keycloak/ /opt/keycloak/
+
+WORKDIR /opt/keycloak
+
+ENV KC_PROXY=edge
+ENV KC_HOSTNAME_STRICT=true
+ENV KC_HOSTNAME_STRICT_HTTPS=true
+ENV KC_HOSTNAME_STRICT_BACKCHANNEL=true
+ENV KC_HTTP_ENABLED=false
+ENV KC_LOG_CONSOLE_OUTPUT=json
+
+ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start", "--optimized --verbose"]
