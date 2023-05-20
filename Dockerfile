@@ -1,25 +1,24 @@
 FROM quay.io/keycloak/keycloak:21.1 as builder
 
-ENV KC_FEATURES=authorization,account2,account-api,admin-fine-grained-authz,admin2,docker,impersonation,token-exchange,client-policies,declarative-user-profile,dynamic-scopes,preview
+# Enable health and metrics support
 ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
+
+# Configure a database vendor
 ENV KC_DB=postgres
-ENV KEYCLOAK_ADMIN=admin
-ENV KEYCLOAK_ADMIN_PASSWORD=admin
-
-RUN ["/opt/keycloak/bin/kc.sh", "build"]
-
-FROM quay.io/keycloak/keycloak:21.1
-
-COPY --from=builder /opt/keycloak/ /opt/keycloak/
 
 WORKDIR /opt/keycloak
+# for demonstration purposes only, please make sure to use proper certificates in production instead
+RUN keytool -genkeypair -storepass password -storetype PKCS12 -keyalg RSA -keysize 2048 -dname "CN=server" -alias server -ext "SAN:c=DNS:localhost,IP:127.0.0.1" -keystore conf/server.keystore
+RUN /opt/keycloak/bin/kc.sh build
 
-ENV KC_PROXY=edge
-ENV KC_HOSTNAME_STRICT=true
-ENV KC_HOSTNAME_STRICT_HTTPS=true
-ENV KC_HOSTNAME_STRICT_BACKCHANNEL=true
-ENV KC_HTTP_ENABLED=false
-ENV KC_LOG_CONSOLE_OUTPUT=json
+FROM quay.io/keycloak/keycloak:21.1
+COPY --from=builder /opt/keycloak/ /opt/keycloak/
 
-ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start", "--optimized", "–-hostname-strict=false"]
+# change these values to point to a running postgres instance
+ENV KC_DB=postgres
+ENV KC_DB_URL=<DBURL>
+ENV KC_DB_USERNAME=postgres
+ENV KC_DB_PASSWORD=postgres
+ENV KC_HOSTNAME=localhost
+ENTRYPOINT ["/opt/keycloak/bin/kc.sh"]
