@@ -21,4 +21,4 @@ ENV KC_HOSTNAME_STRICT_BACKCHANNEL=true
 ENV KC_HTTP_ENABLED=false
 ENV KC_LOG_CONSOLE_OUTPUT=json
 
-ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start", "--optimized --verbose"]
+ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start", "--optimized"]
