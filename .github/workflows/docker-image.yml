@@ -1,8 +1,8 @@
-name: Sync staging
+name: Sync production
 on:
   push:
     branches:
-      - staging
+      - main
   workflow_dispatch:
     inputs:
       skip:
@@ -19,30 +19,3 @@ on:
         options:
           - "Y"
           - "N"
-
-jobs:
-  cd:
-    environment: staging
-    name: Sync staging
-    runs-on: ubuntu-latest
-    permissions: write-all
-    steps:
-      - uses: actions/github-script@v6
-        env:
-          SKIP_BUILD: ${{ github.event.inputs.skip }}
-          ENABLE_BUILD_CACHE: ${{ github.event.inputs.enableCache }}
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-              github.rest.actions.createWorkflowDispatch({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                workflow_id: 'build-sync.yaml',
-                ref: process.env.GITHUB_HEAD_REF || 'main',
-                inputs: {
-                  skip: process.env.SKIP_BUILD,
-                  enableCache: process.env.ENABLE_BUILD_CACHE,
-                  environment: 'staging',
-                  image_tag: 'staging'
-                }
-              })
