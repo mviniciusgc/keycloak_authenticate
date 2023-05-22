@@ -7,7 +7,7 @@ ENV KC_DB=postgres
 ENV KEYCLOAK_ADMIN=admin
 ENV KEYCLOAK_ADMIN_PASSWORD=admin
 
-RUN ["/opt/keycloak/bin/kc.sh", "build"]
+RUN ["/opt/keycloak/bin/kc.sh", "build", "--verbose"]
 
 FROM quay.io/keycloak/keycloak:21.1
 
