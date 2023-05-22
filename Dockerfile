@@ -4,13 +4,13 @@ ENV KC_FEATURES=authorization,account2,account-api,admin-fine-grained-authz,admi
 ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
 ENV KC_HOSTNAME=true
-
 ENV KC_DB=postgres
-ENV KC_DB_URL_HOST=postgresql://postgres:DOwd4l6ecQzWFwTvct8s@containers-us-west-83.railway.app:6583/railway
-ENV KC_DB_USERNAME=postgres
-ENV KC_DB_PASSWORD=DOwd4l6ecQzWFwTvct8s
-ENV KC_DB_URL_HOST=containers-us-west-83.railway.app
-ENV KC_DB_URL_PORT=6583
+ENV DB_ADDR: postgresql://postgres:DOwd4l6ecQzWFwTvct8s@containers-us-west-83.railway.app:6583/railway
+ENV DB_URL_PORT=6583
+ENV DB_PORT_5432_TCP_PORT=6583
+ENV DB_DATABASE: railway
+ENV DB_USER: postgres
+ENV DB_PASSWORD: DOwd4l6ecQzWFwTvct8s
 
 RUN ["/opt/keycloak/bin/kc.sh", "build"]
 
