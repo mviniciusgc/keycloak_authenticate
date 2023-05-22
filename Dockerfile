@@ -6,11 +6,11 @@ ENV KC_METRICS_ENABLED=true
 ENV KC_DB=postgres
 ENV KC_CACHE=ispn
 
-SECRET_KEYCLOAK_ADMIN:admin
-SECRET_KEYCLOAK_ADMIN_PASSWORD:admin
-SECRET_KC_DB_URL:jdbc:postgresql://containers-us-west-83.railway.app:6583/railway
-SECRET_KC_DB_USERNAME:postgres
-SECRET_KC_DB_PASSWORD:DOwd4l6ecQzWFwTvct8s
+ENV KEYCLOAK_ADMIN=admin
+ENV KEYCLOAK_ADMIN_PASSWORD=admin
+ENV KC_DB_URL=jdbc:postgresql://containers-us-west-83.railway.app:6583/railway
+ENV KC_DB_USERNAME=postgres
+ENV KC_DB_PASSWORD=DOwd4l6ecQzWFwTvct8s
 
 RUN ["/opt/keycloak/bin/kc.sh", "build"]
 
