@@ -7,7 +7,7 @@ ENV KC_DB=postgres
 ENV KEYCLOAK_ADMIN=admin
 ENV KEYCLOAK_ADMIN_PASSWORD=admin
 
-RUN ["/opt/keycloak/bin/kc.sh", "build", "--verbose"]
+RUN ["/opt/keycloak/bin/kc.sh", "build"]
 
 FROM quay.io/keycloak/keycloak:21.1
 
@@ -22,4 +22,4 @@ ENV KC_HOSTNAME_STRICT_BACKCHANNEL=true
 ENV KC_HTTP_ENABLED=false
 ENV KC_LOG_CONSOLE_OUTPUT=json
 
-ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start", "--optimized"]
+ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start", "--optimized", "--hostname-strict=false"]
