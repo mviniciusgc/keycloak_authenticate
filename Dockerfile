@@ -4,6 +4,8 @@ ENV KC_FEATURES=authorization,account2,account-api,admin-fine-grained-authz,admi
 ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
 ENV KC_DB=postgres
+ENV KEYCLOAK_ADMIN=admin
+ENV KEYCLOAK_ADMIN_PASSWORD=admin
 
 RUN ["/opt/keycloak/bin/kc.sh", "build"]
 
