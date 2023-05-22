@@ -6,7 +6,7 @@ ENV KC_METRICS_ENABLED=true
 ENV KC_HOSTNAME=true
 ENV KC_DB=postgres
 
-ENV DB_ADDR: containers-us-west-83.railway.app
+ENV DB_ADDR: postgresql://postgres:DOwd4l6ecQzWFwTvct8s@containers-us-west-83.railway.app:6583/railway
 ENV DB_URL_PORT=6583
 ENV DB_PORT_5432_TCP_PORT=6583
 ENV DB_DATABASE: railway
