@@ -5,13 +5,12 @@ ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
 ENV KC_DB=postgres
 
-ENV DB_VENDOR=postgres
-ENV DB_ADDR=containers-us-west-83.railway.app
-ENV DB_DATABASE=railway
-ENV DB_USER=postgres
-ENV DB_PASSWORD=DOwd4l6ecQzWFwTvct8s
 
-EXPOSE 8080
+ENV KC_DB_URL=postgresql://postgres:DOwd4l6ecQzWFwTvct8s@containers-us-west-83.railway.app:6583/railway
+ENV KC_DB_USERNAME=postgres
+ENV KC_DB_PASSWORD=DOwd4l6ecQzWFwTvct8s
+ENV KC_HOSTNAME=containers-us-west-83.railway.app
+ENV KC_HTTP_PORT=8080
 
 RUN ["/opt/keycloak/bin/kc.sh", "build"]
 
