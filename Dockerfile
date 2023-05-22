@@ -21,6 +21,7 @@ COPY --from=builder /opt/keycloak/ /opt/keycloak/
 WORKDIR /opt/keycloak
 
 ENV KC_PROXY=edge
+ENV KC_HOSTNAME_STRICT=false
 ENV KC_HTTP_ENABLED=false
 ENV KC_LOG_CONSOLE_OUTPUT=json
 
