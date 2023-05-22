@@ -1,16 +1,3 @@
-FROM  postgres:15-alpine
-
-ENV POSTGRES_HOST=postgres
-ENV POSTGRES_PORT=5432
-ENV POSTGRES_DATABASE=keycloak
-ENV POSTGRES_USER=keycloak
-ENV POSTGRES_PASSWORD=keycloak
-
-EXPOSE 5432
-
-CMD ["postgres"]
-
-
 FROM quay.io/keycloak/keycloak:21.1 as builder
 
 ENV KC_FEATURES=authorization,account2,account-api,admin-fine-grained-authz,admin2,docker,impersonation,token-exchange,client-policies,declarative-user-profile,dynamic-scopes,preview
@@ -19,6 +6,15 @@ ENV KC_METRICS_ENABLED=true
 ENV KC_DB=postgres
 ENV KEYCLOAK_ADMIN=admin
 ENV KEYCLOAK_ADMIN_PASSWORD=admin
+
+ENV DB_VENDOR=postgres
+ENV DB_ADDR=containers-us-west-83.railway.app
+ENV DB_DATABASE=railway
+ENV DB_USER=postgres
+ENV DB_PASSWORD=DOwd4l6ecQzWFwTvct8s
+
+
+EXPOSE 8080
 
 
 RUN ["/opt/keycloak/bin/kc.sh", "build"]
