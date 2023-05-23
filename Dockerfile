@@ -8,9 +8,11 @@ ENV KC_CACHE=ispn
 
 ENV KEYCLOAK_ADMIN=admin
 ENV KEYCLOAK_ADMIN_PASSWORD=admin
-ENV KC_DB_URL=jdbc:postgresql://containers-us-west-83.railway.app:6583/railway
-ENV KC_DB_USERNAME=postgres
-ENV KC_DB_PASSWORD=DOwd4l6ecQzWFwTvct8s
+
+ENV DB_ADDR: bdpostgres-production.up.railway.app
+ENV DB_DATABASE: postgres
+ENV DB_USER: postgres
+ENV DB_PASSWORD: postgres
 
 RUN ["/opt/keycloak/bin/kc.sh", "build"]
 
